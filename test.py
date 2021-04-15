@@ -45,6 +45,7 @@ if __name__ == '__main__':
         count = 5
         interval = "minute15"
         fees = 0.0005
+        std_diff = 25000
 
         print("시작 시간 : ", datetime.now().strftime('%m/%d %H:%M:%S'))
         print("종목명 : ", coin)
@@ -53,33 +54,16 @@ if __name__ == '__main__':
         while True :
             cur_price = pyupbit.get_current_price(coin)
             dest_price = get_average(coin, count, interval)
-
-            if cur_price < dest_price :
-                buy_all(coin, fees)
-            elif cur_price > dest_price :
-                sell_all(coin)
-
-
+            diff = cur_price - dest_price
+            if diff <= std_diff and diff >= (std_diff * -1) :
+                continue
+            else :
+                if cur_price < dest_price :     # diff < 0
+                    sell_market_all(coin)
+                    time.sleep(1)
+                elif cur_price > dest_price :   # diff > 0
+                    buy_market_all(coin)
+                    time.sleep(1)
 
     except Exception as ex:
         dbgout('`main -> exception! ' + str(ex) + '`')
-
-
-
-        while True:
-            if t_start < t_now < t_sell :  # AM 09:05 ~ PM 03:15 : 매수
-                for sym in symbol_list:
-                    if len(bought_list) < target_buy_count:
-                        buy_etf(sym)
-                        time.sleep(1)
-                if t_now.minute == 30 and 0 <= t_now.second <= 5: 
-                    get_stock_balance('ALL')
-                    time.sleep(5)
-            if t_sell < t_now < t_exit:  # PM 03:15 ~ PM 03:20 : 일괄 매도
-                if sell_all() == True:
-                    dbgout('`sell_all() returned True -> self-destructed!`')
-                    sys.exit(0)
-            if t_exit < t_now:  # PM 03:20 ~ :프로그램 종료
-                dbgout('`self-destructed!`')
-                sys.exit(0)
-            time.sleep(3)
