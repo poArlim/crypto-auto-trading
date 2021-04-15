@@ -1,4 +1,6 @@
 import pyupbit
+from datetime import datetime
+import time, calendar
 import math
 import auth             # save 'access key' and 'secret key'
 
@@ -23,14 +25,18 @@ def buy_limit_all(coin, fees) :
     print("Buy order : ",upbit.buy_limit_order(coin, dest_price, amount))
 
 def sell_market_all(coin) :
-    cancle_all(coin)
     balance = upbit.get_balance(coin)
-    print("Sell market order : ", upbit.sell_market_order(coin, balance))
+    if balance > 0 :
+        #print("datetime.now().strftime('%yyyy%m/%d %H:%M:%S')")
+        sell = upbit.sell_market_order(coin, balance)
+        print(sell['created_at'], "sell", sell['locked'], coin)
 
 def buy_market_all(coin) :
-    cancle_all(coin)
-    balance = upbit.get_balance("KRW")
-    print("Buy market order : ", upbit.buy_market_order(coin, balance))
+    balance = math.floor(upbit.get_balance("KRW")) - 50
+    if balance >= 5000 :
+        #print("datetime.now().strftime('%y%m/%d %H:%M:%S')")
+        buy = upbit.buy_market_order(coin, balance)
+        print(buy['created_at'], "buy", buy['locked'], "won")
 
 def cancle_all(coin) :
     order_list = upbit.get_order(coin)
@@ -45,17 +51,19 @@ if __name__ == '__main__':
         count = 5
         interval = "minute15"
         fees = 0.0005
-        std_diff = 25000
+        std_diff = 40000
 
-        print("시작 시간 : ", datetime.now().strftime('%m/%d %H:%M:%S'))
-        print("종목명 : ", coin)
-        print("시작 금액 : ", upbit.get_balance("KRW"))
+        print("Start Time : ", datetime.now().strftime('%y/%m/%d %H:%M:%S'))
+        print("Coin Name : ", coin)
+        print("Start Money : ", upbit.get_balance("KRW"))
+        print("-----------------------------------------------------------")
 
         while True :
             cur_price = pyupbit.get_current_price(coin)
             dest_price = get_average(coin, count, interval)
             diff = cur_price - dest_price
             if diff <= std_diff and diff >= (std_diff * -1) :
+                time.sleep(0.5)
                 continue
             else :
                 if cur_price < dest_price :     # diff < 0
@@ -64,6 +72,8 @@ if __name__ == '__main__':
                 elif cur_price > dest_price :   # diff > 0
                     buy_market_all(coin)
                     time.sleep(1)
+            time.sleep(1)
 
     except Exception as ex:
-        dbgout('`main -> exception! ' + str(ex) + '`')
+        print("Error!")
+        sys.exit(0)
