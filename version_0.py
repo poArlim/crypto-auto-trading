@@ -6,6 +6,8 @@ import auth             # save 'access key' and 'secret key'
 
 upbit = pyupbit.Upbit(auth.access, auth.secret)
 
+df = pyupbit.get_ohlcv(coin, count = 2, interval = "day")
+
 def get_average(coin, count, interval) :
     df = pyupbit.get_ohlcv(coin, count = count, interval = interval)
     avg = sum(df.close) / count
