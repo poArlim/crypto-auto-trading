@@ -2,9 +2,9 @@
 업비트 API 와 pyupbit 라이브러리를 사용하여 가상화폐 자동거래를 해 주는 프로그램입니다.  
 
 ## 파일구성  
-backtesting.py : 백테스팅 코드  
-cryptoAutoTrade_v0 : 이평선 돌파전략 코드  
-cryptoAutoTrade_v1 : 변동성 돌파 전략 코드  
++ backtesting.py : 백테스팅 코드  
++ cryptoAutoTrade_v0 : 이평선 돌파전략 코드  
++ cryptoAutoTrade_v1 : 변동성 돌파 전략 코드  
 
 ## 구동
 1. 업비트에 고객센터에서 API 를 발급받은 후 access key, secret key 저장한다.
@@ -17,11 +17,11 @@ cryptoAutoTrade_v1 : 변동성 돌파 전략 코드
 5. 실행
 
 ## 백그라운드 실행
-한국 기준으로 서버시간 설정 : sudo ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime  
-백그라운드 실행 : nohup python3 bitcoinAutoTrade.py > output.log &  
-프로세스 확인 : ps -ef | grep .py  
-프로세스 종료 : kill -9 PID  (PID 는 ps 명령의 출력값에서 해당 프로세스의 맨 앞의 숫자)  
++ 한국 기준으로 서버시간 설정 : sudo ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime  
++ 백그라운드 실행 : nohup python3 bitcoinAutoTrade.py > output.log &  
++ 프로세스 확인 : ps -ef | grep .py  
++ 프로세스 종료 : kill -9 PID  (PID 는 ps 명령의 출력값에서 해당 프로세스의 맨 앞의 숫자)  
 
 ## 개발 과정 포스팅
-업비트 API : https://poalim.tistory.com/27  
-알고리즘 및 백테스팅 : https://poalim.tistory.com/29
++ 업비트 API : https://poalim.tistory.com/27  
++ 알고리즘 및 백테스팅 : https://poalim.tistory.com/29
