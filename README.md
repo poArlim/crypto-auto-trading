@@ -16,7 +16,7 @@
 4. 필요한 모듈 다운로드
     + pip3 install pyupbit
     + pip3 install openpyxl
-    + pip3 install request
+    + pip3 install requests
     + ...
 5. 실행
 
