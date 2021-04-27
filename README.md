@@ -2,9 +2,11 @@
 업비트 API 와 pyupbit 라이브러리를 사용하여 가상화폐 자동거래를 해 주는 프로그램입니다.  
 
 ### 파일구성  
-+ backtesting.py : 백테스팅 코드  
++ backtesting.py : 변동성 돌파 전략 백테스팅 코드  
++ backtesting_v2.py : 변동성 돌파 + best_K 전략 백테스팅 코드
 + cryptoAutoTrade_v0 : 이평선 돌파전략 코드  
 + cryptoAutoTrade_v1 : 변동성 돌파 전략 코드  
++ cryptoAutoTrade_v2 : 변동성 돌파 + best_K 전략 코드(미완)
 
 ### 구동
 1. 업비트에 고객센터에서 API 를 발급받은 후 access key, secret key 저장한다.
