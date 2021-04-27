@@ -7,6 +7,7 @@
 + cryptoAutoTrade_v0 : 이평선 돌파전략 코드  
 + cryptoAutoTrade_v1 : 변동성 돌파 전략 코드  
 + cryptoAutoTrade_v2 : 변동성 돌파 + best_K 전략 코드(미완)
++ cryptoAutoTrade_v3 : slack 메신저 알람 기능 추가 버전
 
 ### 구동
 1. 업비트에 고객센터에서 API 를 발급받은 후 access key, secret key 저장한다.
@@ -15,6 +16,7 @@
 4. 필요한 모듈 다운로드
     + pip3 install pyupbit
     + pip3 install openpyxl
+    + pip3 install request
     + ...
 5. 실행
 
@@ -31,3 +33,4 @@
 2. 변동성 돌파 전략 및 백테스팅 : https://poalim.tistory.com/29
 3. 변동성 돌파전략 구현 : https://poalim.tistory.com/30
 4. best_K 전략 추가 및 백테스팅 : https://poalim.tistory.com/31
+5. slack 메신저 알람기능 추가 : https://poalim.tistory.com/32
