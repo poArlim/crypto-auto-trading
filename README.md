@@ -27,5 +27,7 @@
 + 프로세스 종료 : kill -9 PID  (PID 는 ps 명령의 출력값에서 해당 프로세스의 맨 앞의 숫자)  
 
 ### 개발 과정 포스팅
-+ 업비트 API : https://poalim.tistory.com/27  
-+ 알고리즘 및 백테스팅 : https://poalim.tistory.com/29
+1. 업비트 API : https://poalim.tistory.com/27  
+2. 변동성 돌파 전략 및 백테스팅 : https://poalim.tistory.com/29
+3. 변동성 돌파전략 구현 : https://poalim.tistory.com/30
+4. best_K 전략 추가 및 백테스팅 : https://poalim.tistory.com/31
