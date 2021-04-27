@@ -36,7 +36,7 @@ df['drr'] = np.where(df['high'] > df['targetPrice'], (df['close'] / (1 + fees)) 
 df['crr'] = (df['drr'] + 1).cumprod() - 1
 df['dd'] = -(((df['crr'] + 1).cummax() - (df['crr'] + 1)) / (df['crr'] + 1).cummax())
 
-print("기간수익률 :", df['crr'][-1] * 100 - 100, "% , 최대손실률 :", df['dd'].min() * 100, "% , 수수료 :", fees * 100, "%")
+print("기간수익률 :", df['crr'][-1] * 100, "% , 최대손실률 :", df['dd'].min() * 100, "% , 수수료 :", fees * 100, "%")
 print("알고리즘 적용 없을 시 수익률 :", ((df['close'][-1]/(1+fees))/(df['open'][0]*(1+fees))-1) * 100,"%")
 
 df.to_excel("crypto_history.xlsx")
