@@ -61,7 +61,7 @@ if __name__ == '__main__':
         df = pyupbit.get_ohlcv(coin, count = 2, interval = "day")
         targetPrice = get_targetPrice(df, get_best_K(coin, fees))
         print(datetime.datetime.now().strftime('%y/%m/%d %H:%M:%S'), "\t\tBalance :", start_balance, "KRW \t\tYield :", ((start_balance / start_balance) - 1) * 100, "% \t\tNew targetPrice :", targetPrice, "KRW")
-        post_message("자동매매를 시작합니다.\n잔액 : "+str(start_balance)+" 원")
+        post_message("자동매매를 시작합니다.\n잔액 : "+str(start_balance)+" 원\n목표매수가 : "+str(targetPrice))
 
         while True :
             now = datetime.datetime.now()
@@ -74,7 +74,7 @@ if __name__ == '__main__':
 
                 cur_balance = upbit.get_balance("KRW")
                 print(now.strftime('%y/%m/%d %H:%M:%S'), "\t\tBalance :", cur_balance, "KRW \t\tYield :", ((cur_balance / start_balance) - 1) * 100, "% \t\tNew targetPrice :", targetPrice, "KRW")
-                post_message("새로운 장 시작\n수익률 : "+str(((cur_balance / start_balance) - 1) * 100)+"%, 잔액 : "+str(cur_balance)+"원")
+                post_message("새로운 장 시작\n수익률 : "+str(((cur_balance / start_balance) - 1) * 100)+"%\n잔액 : "+str(cur_balance)+"원\n목표매수가 : "+str(targetPrice))
             
             elif targetPrice <= pyupbit.get_current_price(coin) :
                 buy_all(coin)
