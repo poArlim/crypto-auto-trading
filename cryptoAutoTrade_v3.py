@@ -21,7 +21,7 @@ def buy_all(coin) :
     if balance >= 5000 :
         buy_result = upbit.buy_market_order(coin, balance)
         print(buy_result)
-        post_message("매수 체결.\n체결 단가 : "+str(buy_result['price']))
+        post_message("매수 체결.\n체결 단가 : "+str(buy_result['avg_price'])+" 원")
 
 def sell_all(coin) :
     balance = upbit.get_balance(coin)
@@ -29,7 +29,7 @@ def sell_all(coin) :
     if price * balance >= 5000 :
         sell_result = upbit.sell_market_order(coin, balance)
         print(sell_result)
-        post_message("매도 체결.\n체결 단가 : "+str(sell_result['price']))
+        post_message("매도 체결.\n체결 단가 : "+str(sell_result['avg_price'])+" 원")
 
 def get_crr(df, fees, K) :
     df['range'] = df['high'].shift(1) - df['low'].shift(1)
@@ -61,7 +61,7 @@ if __name__ == '__main__':
         df = pyupbit.get_ohlcv(coin, count = 2, interval = "day")
         targetPrice = get_targetPrice(df, get_best_K(coin, fees))
         print(datetime.datetime.now().strftime('%y/%m/%d %H:%M:%S'), "\t\tBalance :", start_balance, "KRW \t\tYield :", ((start_balance / start_balance) - 1) * 100, "% \t\tNew targetPrice :", targetPrice, "KRW")
-        post_message("자동매매를 시작합니다.\n잔액 : "+str(start_balance)+" 원\n목표매수가 : "+str(targetPrice))
+        post_message("자동매매를 시작합니다.\n잔액 : "+str(start_balance)+" 원\n목표매수가 : "+str(targetPrice)+" 원")
 
         while True :
             now = datetime.datetime.now()
@@ -74,7 +74,7 @@ if __name__ == '__main__':
 
                 cur_balance = upbit.get_balance("KRW")
                 print(now.strftime('%y/%m/%d %H:%M:%S'), "\t\tBalance :", cur_balance, "KRW \t\tYield :", ((cur_balance / start_balance) - 1) * 100, "% \t\tNew targetPrice :", targetPrice, "KRW")
-                post_message("새로운 장 시작\n수익률 : "+str(((cur_balance / start_balance) - 1) * 100)+"%\n잔액 : "+str(cur_balance)+"원\n목표매수가 : "+str(targetPrice))
+                post_message("새로운 장 시작\n수익률 : "+str(((cur_balance / start_balance) - 1) * 100)+" %\n잔액 : "+str(cur_balance)+" 원\n목표매수가 : "+str(targetPrice)+" 원")
             
             elif targetPrice <= pyupbit.get_current_price(coin) :
                 buy_all(coin)
@@ -83,7 +83,7 @@ if __name__ == '__main__':
                 end_time = start_time + datetime.timedelta(days=1)
                 if end_time > now :
                     print((end_time - now).seconds)
-                    time.sleep((end_time - now).seconds - 60)
+                    time.sleep((end_time - now).seconds)
     
             time.sleep(1)
 
