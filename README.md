@@ -9,7 +9,7 @@
 + cryptoAutoTrade_v2 : 변동성 돌파 + best_K 전략 코드(미완)
 + cryptoAutoTrade_v3 : slack 메신저 알람 기능 추가 버전
 
-### 백테스팅 결과 (2017-10-11 ~ 2021-05-2)  
+### 백테스팅 결과 (2017-10-11 ~ 2021-05-02)  
 ##### 비트코인 가격 변동(x축 : 시간, y축 : 가격)  
 
 ![비트코인](https://user-images.githubusercontent.com/43959582/116827776-c8317400-abd5-11eb-8d3a-a6d85ea20c25.jpg)  
