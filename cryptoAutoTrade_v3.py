@@ -19,17 +19,15 @@ def get_targetPrice(df, K) :
 def buy_all(coin) :
     balance = upbit.get_balance("KRW") * 0.9995
     if balance >= 5000 :
-        buy_result = upbit.buy_market_order(coin, balance)
-        print(buy_result)
-        post_message("매수 체결.\n체결 단가 : "+str(buy_result['avg_price'])+" 원")
+        print(upbit.buy_market_order(coin, balance))
+        post_message("매수 체결.\n체결 단가 : "+str(pyupbit.get_current_price(coin))+" 원")
 
 def sell_all(coin) :
     balance = upbit.get_balance(coin)
     price = pyupbit.get_current_price(coin)
     if price * balance >= 5000 :
-        sell_result = upbit.sell_market_order(coin, balance)
-        print(sell_result)
-        post_message("매도 체결.\n체결 단가 : "+str(sell_result['avg_price'])+" 원")
+        print(upbit.sell_market_order(coin, balance))
+        post_message("매도 체결.\n체결 단가 : "+str(pyupbit.get_current_price(coin))+" 원")
 
 def get_crr(df, fees, K) :
     df['range'] = df['high'].shift(1) - df['low'].shift(1)
@@ -56,7 +54,7 @@ if __name__ == '__main__':
         coin = "KRW-BTC"
         fees = 0.0005
         K = 0.5
-    
+        
         start_balance = upbit.get_balance("KRW")
         df = pyupbit.get_ohlcv(coin, count = 2, interval = "day")
         targetPrice = get_targetPrice(df, get_best_K(coin, fees))
@@ -65,7 +63,7 @@ if __name__ == '__main__':
 
         while True :
             now = datetime.datetime.now()
-            if now.hour == 9 and now.minute == 2 and now.second == 0:    # when am 09:02:00
+            if now.hour == 9 and now.minute == 2 :    # when am 09:02:00
                 sell_all(coin)
                 time.sleep(10)
 
@@ -75,14 +73,14 @@ if __name__ == '__main__':
                 cur_balance = upbit.get_balance("KRW")
                 print(now.strftime('%y/%m/%d %H:%M:%S'), "\t\tBalance :", cur_balance, "KRW \t\tYield :", ((cur_balance / start_balance) - 1) * 100, "% \t\tNew targetPrice :", targetPrice, "KRW")
                 post_message("새로운 장 시작\n수익률 : "+str(((cur_balance / start_balance) - 1) * 100)+" %\n잔액 : "+str(cur_balance)+" 원\n목표매수가 : "+str(targetPrice)+" 원")
-            
+                time.sleep(60);
+
             elif targetPrice <= pyupbit.get_current_price(coin) :
                 buy_all(coin)
                 
                 start_time = df.index[-1]
                 end_time = start_time + datetime.timedelta(days=1)
                 if end_time > now :
-                    print((end_time - now).seconds)
                     time.sleep((end_time - now).seconds)
     
             time.sleep(1)
