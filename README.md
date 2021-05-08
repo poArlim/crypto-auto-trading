@@ -9,6 +9,27 @@
 + cryptoAutoTrade_v2 : 변동성 돌파 + best_K 전략 코드(미완)
 + cryptoAutoTrade_v3 : slack 메신저 알람 기능 추가 버전
 
+### 백테스팅 결과 (2017-10-11 ~ 2021-05-02)  
+##### 비트코인 가격 변동(x축 : 시간, y축 : 가격)  
+
+![비트코인](https://user-images.githubusercontent.com/43959582/116827776-c8317400-abd5-11eb-8d3a-a6d85ea20c25.jpg)  
+수익률 : 1131 %  
+최대손실률(MDD) : -90 %  
+  
+##### Version 1 변동성 돌파 전략 적용(x축 : 시간, y축 : 누적수익률(%))  
+
+![v1](https://user-images.githubusercontent.com/43959582/116827779-cb2c6480-abd5-11eb-94c4-7ac5eab4a772.jpg)  
+수익률 : 2067 %  
+최대손실률(MDD) : -20 %  
+  
+##### Version 2 변동성 돌파 + best_K 전략 적용(x축: 시간, y축 : 누적수익률(%))  
+
+![v2](https://user-images.githubusercontent.com/43959582/116827784-ccf62800-abd5-11eb-9ad5-a647d775bc6c.jpg)  
+수익률 : 7640 %  
+최대손실률(MDD) : -39%  
+  
+
+
 ### 구동
 1. 업비트에 고객센터에서 API 를 발급받은 후 access key, secret key 저장한다.
 2. crypto-auto 폴더 안에 auth.py 파일을 하나 만들고 access = "본인의 access key 값" secret = "본인의 secret key 값" 을 넣고 저장한다. 이 값은 cryptoAutoTrade 코드에서 import 하여 사용된다. cryptoAutoTrade_v3 이상의 버전에서는 slack 메신저를 위해 myToken = "본인의 slack API OAuth token 값", channel = "알림을 받을 채널명" 도 추가해주어야 한다.
